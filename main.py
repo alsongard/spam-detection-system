@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from sklearn.metrics import classification_report
 from sklearn.feature_extraction.text import CountVectorizer
 from IPython.display import display
 from sklearn.model_selection import train_test_split
@@ -33,3 +34,14 @@ print(X_test)
 
 
 #training the model
+clf = MultinomialNB()
+clf.fit(X_train, y_train)
+
+#model evaluation
+y_pred = clf.predict(X_test)
+print(classification_report(y_test, y_pred))
+
+#testing the model
+message = vectorizer.transform(["Today's Offer!, Claim your 3000$! Text YES to 3034 now! To win your prize"])
+prediction = clf.predict(message)
+print("The email is :", prediction[0])
